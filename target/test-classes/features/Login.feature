@@ -2,13 +2,13 @@ Feature: Login related scenarios
 
   Background: Given user is navigated to HRMS application
 
-  @sprint1 @regression @smoke @newTestcase @newFeature @sprint2 @login @test
+  @sprint1
   Scenario: Valid admin login
     # Given user is navigated to HRMS application
     When user enters valid admin username and password
     And user clicks on login button
     Then user is successfully logged in the application
-
+  @test1
   Scenario: Enter as a valid Admin
     When user enters the username "Admin" and the password "Hum@nhrm123"
     And clicks on login Btn

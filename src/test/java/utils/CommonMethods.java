@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.Set;
 
 public class CommonMethods extends PageInitializer {
 
@@ -90,7 +91,53 @@ public class CommonMethods extends PageInitializer {
         WebElement mdd = driver.findElement(By.xpath(path));
         Select sel1 = new Select(mdd);
         sel1.selectByVisibleText(text);
-
     }
+
+    // Switch to a specific window handle by providing its handle
+    public static void switchToWindowByHandle(WebDriver driver, String targetWindowHandle) {
+        Set<String> windowHandles = driver.getWindowHandles();
+
+        windowHandles
+                .stream()
+                .filter(handle -> handle.equals(targetWindowHandle))
+                .findFirst()
+                .ifPresent(handle -> {
+                    driver.switchTo().window(handle);
+                    System.out.println("Switched to Window Handle: " + handle);
+                });
+    }
+
+    // Switch to a frame by its name or id attribute
+    public static void switchToFrame(WebDriver driver, String frameName) {
+        driver.switchTo().frame(frameName);
+    }
+
+    // Switch to a frame by its index
+    public static void switchToFrame(WebDriver driver, int frameIndex) {
+        driver.switchTo().frame(frameIndex);
+    }
+
+    // Switch to a frame using a WebElement representing the frame
+    public static void switchToFrame(WebDriver driver, WebElement frameElement) {
+        driver.switchTo().frame(frameElement);
+    }
+
+    // Select a dropdown option by visible text (name)
+    public static void selectDDValue(WebDriver driver, WebElement dropdownElement, String visibleText) {
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByVisibleText(visibleText);
+    }
+    // Select a dropdown option by index
+    public static void selectDDValue(WebDriver driver, WebElement dropdownElement, int index) {
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByIndex(index);
+    }
+    // Select a dropdown option by value
+    public static void selectDDValue(WebDriver driver,  String value, WebElement dropdownElement) {
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByValue(value);
+    }
+
+
 
 }

@@ -8,6 +8,7 @@ import utils.CommonMethods;
 public class DashboardPage extends CommonMethods {
 
     @FindBy(xpath = "//a[text()='Welcome Admin']")
+
     public WebElement welcomeMessage;
 
 

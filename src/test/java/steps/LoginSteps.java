@@ -3,11 +3,13 @@ package steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.junit.Assert;
 import pages.DashboardPage;
 import utils.CommonMethods;
 import utils.ConfigReader;
 import io.cucumber.datatable.DataTable;
+import utils.Log;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,9 @@ public class LoginSteps extends CommonMethods {
     }
     @When("user enters valid admin username and password")
     public void user_enters_valid_admin_username_and_password() {
+        // integrate the log4j.xml configuration file into our project
+        DOMConfigurator.configure("log4j.xml");
+        Log.startTestCase("The test case is starting");
     sendText(ConfigReader.getPropertyValue("username"), loginPage.usernameField);
     sendText(ConfigReader.getPropertyValue("password"), loginPage.passwordField);
 
@@ -49,6 +54,7 @@ public class LoginSteps extends CommonMethods {
 
     @Then("user is successfully logged in the application")
     public void user_is_successfully_logged_in_the_application() {
+        Log.info("The test case is in the final step");
         String actualMsg = dashboardPage.welcomeMessage.getText();
         String expectedMsg = "Welcome Admin";
         Assert.assertEquals(actualMsg,expectedMsg);
@@ -56,7 +62,6 @@ public class LoginSteps extends CommonMethods {
     @Then("the user is not logged in and verifies the message {string}")
     public void the_user_is_not_logged_in_and_verifies_the_message(String expectedMsg) {
         String actualErrorMsg = loginPage.errorMsgField.getText();
-
         Assert.assertEquals(actualErrorMsg,expectedMsg);
     }
 

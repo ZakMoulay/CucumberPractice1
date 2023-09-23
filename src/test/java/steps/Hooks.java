@@ -2,11 +2,10 @@ package steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import utils.CommonMethods;
+import io.cucumber.java.Scenario;
 
 public class Hooks extends CommonMethods {
-
     @Before
     public void start() {
         openBrowserAndLunchApplication();
@@ -25,4 +24,5 @@ public class Hooks extends CommonMethods {
         scenario.attach(pic,"image/png",scenario.getName());
         closeBrowser();
     }
+
 }
